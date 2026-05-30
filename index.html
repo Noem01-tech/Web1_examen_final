@@ -4,25 +4,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Test</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/animation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="assets/images/Logo.png" type="image/png" sizes="64*64">
+    <title> Typing Test</title>
 </head>
 
 <body>
     <header>
-        <h1>Typing Test</h1>
-        <label for="mode">Select Mode:</label>
-        <select id="mode">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-        </select>
+        <div class="logo">
+            <div class="header_logo">
+            </div>
+            <h1>KEY BREAKER</h1>
+        </div>
+        
+        <div class="navigation">
+            <a href="">Acceuil</a>
+            <a href="">À propos</a>
+            <a href="">Feedback</a>
+            <a href="">Reseaux</a>
+        </div>
+        <div class="choose">
+            <label for="mode">Select Mode:</label>
+            <select id="mode">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        
     </header>
 
     <main>
-        <p id="word-display"></p>
+        <!-- <p id="word-display"></p>
         <input type="text" id="input-field" autofocus>
-        <p id="results">Results : </p>
+        <p id="results">Results : </p> -->
+        <section class="hero">
+            <div class="left">
+                <h2>Bienvenue sur <span>KEY BREAKER</span></h2>
+                <p>Fais danser tes doigts sur le clavier. Garde le rythme, aligne les mots sans faire de faute et explose le compteur de score.</p>
+                <button>JOUER</button>
+            </div>
+            <div class="right">
+                <img src="assets/images/keyboard.png" alt="">
+            </div>
+
+        </section>
+
+        <div class="rules">
+            <div class="title">
+                <h1>Les enjeux</h1>
+            </div>
+            
+            <div class="card_container">
+                <div class="card">
+                    <div class="stopwatch">
+                        <img src="assets/images/stopwatch.png" alt="">
+                    </div>
+                    <div class="stopwatch_text">
+                        <h2>Observez votre rapidité</h2>
+                        <p>Testez la vitesse de vos doigts et découvrez votre véritable score de mots par minute !</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="broken">
+                        <img src="assets/images/brokenStopwatch.png" alt="">
+                    </div>
+                    <div class="broken_text">
+                        <h2>Detruisez votre record</h2>
+                        <p>Entrez dans la zone, alignez les mots avec une précision chirurgicale et détruisez votre record de temps à chaque session</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="stats">
+                        <img src="assets/images/stats.png" alt="">
+                    </div>
+                    <div class="stats_text">
+                        <h2>Analysez votre performance</h2>
+                        <p>Pas de place pour le hasard. Analysez votre vitesse brute, votre régularité et devenez une véritable machine à taper.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </main>
+
+    <footer>
+        <div class="upper">
+            <div class="left">
+                <div class="foot_logo">
+                    <img src="assets/images/Logo.png" alt="">
+                    <h2>KEY BREAKER</h2>
+                </div>
+                <div class="text">
+                    <p>Dominez le clavier. <br>
+                        Améliorez votre vitesse et votre précision.</p>
+                </div>
+                <div class="social">
+                    <a href=""><i class="fa-brands fa-discord" style="color: white;"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook" style="color: white;"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram" style="color: white;"></i></a>
+                    <a href=""><i class="fa-brands fa-x-twitter" style="color: white;"></i></a>
+                </div>
+            </div>
+            
+            <div class="links">
+                <h2>LIENS</h2>
+                <a href="">Acceuil</a>
+                <a href="">À propos</a>
+                <a href="">Feedback</a>
+                <a href="">Blog</a>
+                <a href="">FAQ</a>
+            </div>
+
+            <div class="community">
+                <h2>COMMUNITY</h2>
+                <a href="">Serveur discord</a>
+                <a href="">Forum</a>
+                <a href="">Contribuer</a>
+            </div>
+
+            <div class="right">
+                <img src="assets/images/Logo.png" alt="">
+                <h2>KEY BREAKER</h2>
+            </div>
+        </div>
+        <div class="lower">
+            <hr>
+            <p>© 2026  Keybreaker. All rights reserved.</p>
+            <hr>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

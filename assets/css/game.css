@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+                    /* HEADER PART  */
+
+
+
+/* Landing page  */
+
+                                    /* NAVIGATION */
+
+
+
+                                /* MAIN  */
+
+
+main{
+    display: flex;
+}
+
+main .navigation{
+    width: 20%;
+    height: 100%;
+    border-right: 2px solid;
+    border-image:linear-gradient(135deg,#10727d,#45507b,#f12be6) 1;
+}
+
+main .navigation .logo{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border-bottom: 2px solid;
+    border-image:linear-gradient(135deg,#10727d,#45507b,#f12be6) 1;
+}
+
+main .navigation .logo img{
+    width: 10vw;
+    height: 12vh;
+    position: absolute;
+    left: 0;
+    transform: translateX(-25%) translateY(10%);
+}
+
+main .navigation .logo h1{
+    font-size: clamp(24px,1.5rem,26px);
+    font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    -webkit-background-clip: text;
+     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 5vw;
+}
+
+/* Choose */
+
+main .navigation .choose{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding-left: 2vw;
+    border-bottom: 2px solid;
+    border-image:linear-gradient(135deg,#10727d,#45507b,#f12be6) 1;
+}
+
+main .navigation .choose label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: clamp(22px,1.3rem,23px);
+}
+
+main .navigation .choose select{
+    width: 8vw;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-align: center;
+    font-size: clamp(16px,1rem,20px);
+}
+
+/* Links  */
+
+main .navigation .links{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid;
+    border-image:linear-gradient(135deg,#10727d,#45507b,#f12be6) 1;
+}
+
+main .navigation .links h2{
+    margin-left: 2vw;
+    margin-top: 2vh;
+}
+
+main .navigation .links a img{
+    width: 3.7vw;
+}
+
+
+main .navigation .links a{
+    margin-left: 3vw;
+    display: flex;
+    margin-block: 2vh;
+    text-decoration: none;
+    font-size: clamp(24px,1.5rem,26px);
+    color: black;
+}
+
+main .navigation .links a #acceuil{
+    margin-top: 1vh;
+}
+
+main .navigation .links .propos{
+    margin-left: 3.8vw;
+}
+
+main .navigation .links a #propos{
+    margin-left: 1vw;
+}
+
+main .navigation .links .parametres{
+    margin-left: 3.7vw;
+}
+
+main .navigation .links a #parametres{
+    margin-left: 1vw;
+}
+
+/* Mode sombre  */
+
+main .darkMode{
+    display: flex;
+    height: 10vh;
+    align-items: center;
+}
+
+main .darkMode p{
+    min-width: 5vw;
+    font-size: clamp(20px,1.25rem,22px);
+    margin-left: 2vw;
+    font-weight: 600;
+}
+
+main .darkMode .check{
+    width: 3vw;
+    height: 3vh;
+    border: 1px solid black;
+    border-radius:30px ;
+    margin-left: 5vw;
+    display: flex;
+    align-items: center;
+    background-color: cyan;
+}
+
+main .darkMode .check .round{
+    width: 1.2vw;
+    height: 2.4vh;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 0.15vw;
+    background-color: yellow;
+}
+
+                            /* RIGHT SIDE  */
+
+
+
+main .container{
+    width: 70%;
+    height: 80vh;
+    margin-left: 5%;
+    border: solid 1px black;
+}

@@ -1,0 +1,438 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+                    
+                    
+                    /* HEADER PART  */
+
+
+
+/* Landing page  */
+
+header{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be7);
+    z-index: 100;
+}
+
+header .logo{
+    width: 15vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .logo .header_logo{
+    width: 5vw;
+    height: 100%;
+    background-image:url(../images/Logo.png);
+    background-size: cover;
+    background-position: center;
+}
+
+header h1{
+    width: fit-content;
+    font-size: clamp(16px,1rem,20px);
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
+    margin-bottom: 2vh;
+    -webkit-text-stroke: 0.01px beige;
+}
+
+header .navigation{
+    display: flex;
+    gap: 4vw;
+    padding-right: 1vw;
+}
+
+header .navigation a{
+    text-decoration: none;
+    color: white;
+    font-size: clamp(24px,1.5vw,28px);
+}
+
+header .choose{
+    padding-right: 5vw;
+    display: flex;
+    align-items: center;
+}
+
+header label{
+    font-size: clamp(24px,1.5vw,28px);
+    color: white;
+}
+
+header #mode{
+    width: 5vw;
+    height: 3vh;
+    margin-left: 1vw;
+    border: none;
+    border-radius: 5px;
+}
+
+
+
+
+                        /* HERO SECTION  */
+
+main{
+    /* background: linear-gradient(135deg,#10727dc9 0%,#45507bbe 30%,#f12be7bd 90%); */
+}
+
+main .hero{
+    width: 100%;
+    height: 70vh;
+    background: linear-gradient(135deg,#10727dc9,#45507bbe,#f12be7bd);
+    display: flex;
+    margin-top: 10vh;
+    display: flex;
+    align-items: center;
+    padding-top: 20vh;
+    gap: 2vh;
+}
+
+/* Left part  */
+
+main .hero .left{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    text-align: left;
+    padding-left: 10vw;
+}
+
+main .left h2{
+    font-size: clamp(48px,3vw,50px);
+    color: white;
+}
+
+main .left h2 span{
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
+}
+
+main .left p{
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 45vw;
+    font-size:clamp(24px,1.5vw,26px) ;
+    /* text-align: center; */
+    color: white;
+}
+
+main .hero button{
+    width:10vw;
+    height: 8vh;
+    border-radius:15px;
+    border: none;
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    color: white;
+    font-size:clamp(24px,1.5vw,26px) ;
+    margin-top: 5vh;
+    margin-left: 17.5vw;
+}
+
+/* Right part  */
+
+main .hero .right{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+main .hero .right img{
+    width: 80%;
+    height: 70%;
+    margin-bottom: 25vh;
+    animation: hautBas 5s linear infinite;
+}
+
+
+
+                                    /* RULES  */
+
+
+
+main .rules{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(45deg,#10727d80 ,#45507b73 ,#f12be760 );
+}
+
+main .rules .title h1{
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: clamp(40px,2.5rem,42px);
+    margin-block: 2vh;
+    font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
+}
+
+main .card_container{
+    display: flex;
+    justify-content: center;
+    gap: 10vw;
+    padding-bottom: 15vh;
+}
+
+main .rules .card{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 55vh;
+    margin-top: 5vh;
+    box-shadow: 0px 0px 5px black;
+    background-color: lightslategray;
+    border-radius: 15px;
+}
+
+main .rules .card h2{
+    color: white;
+}
+
+main .rules .card p{
+    color: white;
+}
+
+/* stopwatch */
+
+main .rules .stopwatch{
+    width: 100%;
+    height: 40%;
+}
+
+main .rules .stopwatch img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 15px 0 0;
+}
+
+main .rules .stopwatch_text{
+    padding-left: 1vw;
+    padding-top: 2vh;
+}
+
+main .rules .card h2{
+    font-size: clamp(24px,1.5rem,28px);
+}
+
+main .rules .card p{
+    margin-top: 3vh;
+    font-size: clamp(24px,1.5rem,28px);
+}
+
+/* Broken  */
+
+main .rules .card .broken{
+    width: 100%;
+    height: 40%;
+}
+
+main .rules .broken img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 15px 0 0;
+}
+
+main .rules .broken_text{
+    padding-left: 1vw;
+    padding-top: 2vh;
+}
+
+/* Stats  */
+
+main .rules .card .stats{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    border-radius: 15px 15px 0 0;
+}
+
+main .rules .stats img{
+    width: 80%;
+    height: 100%;
+}
+
+main .rules .stats_text{
+    padding-left: 1vw;
+    padding-top: 2vh;
+}
+
+                                    /* FOOTER  */
+                                
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: lightslategray;
+}
+
+footer .left{
+    display: flex;
+    width: 30%;
+    height: 45vh; 
+    flex-direction: column;
+}
+
+footer .foot_logo{
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    position: relative;
+}
+
+
+footer .foot_logo img{
+    width: 13vw;
+    height: 15vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-25%,0);
+}
+
+footer .foot_logo h2{
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 6vh;
+    left: 6vw;
+    transform: translateY(-50%);
+}
+
+footer .left .text{
+    margin-top: 2vh;
+    padding-left: 2vw;
+}
+
+footer .left .text p{
+    font-size: clamp(20px,1.3rem,22px);
+    color: white;
+}
+
+footer .left .social{
+    display: flex;
+    padding-left: 2vw;
+    padding-top: 5vh;
+    gap: 3vw;
+}
+
+footer .left .social a{
+    font-size: clamp(32px,2rem,34px);
+    color: white;
+}
+
+/* Links */
+
+footer .upper{
+    display: flex;
+    width: 100%;
+}
+
+footer .links{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3vw;
+    padding-top: 4vh;
+    gap: 3vh;
+}
+
+footer .links h2{
+    font-size: clamp(32px,2rem,34px);
+    color: white;
+}
+
+footer .links a{
+    text-decoration: none;
+    font-size: clamp(20px,1.3rem,22px);
+    color: white;
+}
+
+footer .community{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 4vh;
+    gap: 3vh;
+}
+
+footer .community h2{
+    font-size: clamp(32px,2rem,34px);
+    color: white;
+}
+
+footer .community a{
+    text-decoration: none;
+    font-size: clamp(20px,1.3rem,22px);
+    color: white;
+}
+
+/* Right  */
+
+footer .right{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+footer .right img{
+    width: 100%;
+    height: 25vh;
+}
+
+footer .right h2{
+    position: absolute;
+    top: 55%;
+    transform: translateY(50%);
+    font-size: clamp(32px,2rem,34px);
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+footer .lower{
+    width: 100%;
+    height: auto;
+}
+
+footer .lower p{
+    width: fit-content;
+    margin-inline: auto;
+    margin-block: 1vh;
+    color: white;
+}
