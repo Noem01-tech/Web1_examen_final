@@ -22,6 +22,7 @@
 
 main{
     display: flex;
+    background: linear-gradient(135deg, #10727db9,#45507b7c,#f12be7b2);
 }
 
 main .navigation{
@@ -29,6 +30,7 @@ main .navigation{
     height: 100%;
     border-right: 2px solid;
     border-image:linear-gradient(135deg,#10727d,#45507b,#f12be6) 1;
+    background: linear-gradient(135deg,#0589a07c 60%,#c88fc4 );
 }
 
 main .navigation .logo{
@@ -50,13 +52,14 @@ main .navigation .logo img{
 }
 
 main .navigation .logo h1{
-    font-size: clamp(24px,1.5rem,26px);
+    font-size: clamp(30px,2rem,32px);
     font-family: 'Cherry Bomb One',Arial, Helvetica, sans-serif;
     background: linear-gradient(135deg,#10727d,#45507b,#f12be6);
     -webkit-background-clip: text;
      background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-left: 5vw;
+    -webkit-text-stroke: 0.15px white;
 }
 
 /* Choose */
@@ -75,6 +78,7 @@ main .navigation .choose label{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     font-size: clamp(22px,1.3rem,23px);
+    color: white;
 }
 
 main .navigation .choose select{
@@ -100,6 +104,7 @@ main .navigation .links{
 main .navigation .links h2{
     margin-left: 2vw;
     margin-top: 2vh;
+    color: white;
 }
 
 main .navigation .links a img{
@@ -113,7 +118,7 @@ main .navigation .links a{
     margin-block: 2vh;
     text-decoration: none;
     font-size: clamp(24px,1.5rem,26px);
-    color: black;
+    color: white;
 }
 
 main .navigation .links a #acceuil{
@@ -149,6 +154,7 @@ main .darkMode p{
     font-size: clamp(20px,1.25rem,22px);
     margin-left: 2vw;
     font-weight: 600;
+    color: white;
 }
 
 main .darkMode .check{
@@ -173,11 +179,181 @@ main .darkMode .check .round{
 
                             /* RIGHT SIDE  */
 
+main .right{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
 
+main .right .mode_display{
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid;
+    border-image:linear-gradient(135deg,#10727d,#45507b,#f12be6) 1;
+    gap: 5vw;
+    background: linear-gradient(135deg,#10727d79,#45507b7c,#f12be7b2);
+}
+
+main .right .mode_display #modeP{
+    margin-left: 3vw;
+    font-weight: 600;
+    color: white;
+}
+
+main .right .mode_display .mode{
+    width: 7vw;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg,#10727d79,#45507b7c,#f12be7b2);
+}
+
+main .right .mode_display .medium p{
+    margin-left: 1vw;
+    color: white;
+}
+
+
+main .right .mode_display .easy p,
+main .right .mode_display .hard p{
+    margin-left: 2vw;
+    color: white;
+}
+
+main .right .mode_display .mode .green{
+    width: 1vw;
+    height: 70%;
+    border-radius: 50%;
+    margin-left: 0.5vw;
+    background-color: lime;
+}
+
+main .right .mode_display .mode .yellow{
+    width: 1vw;
+    height: 70%;
+    border-radius: 50%;
+    margin-left: 0.5vw;
+    background-color: yellow;
+}
+
+main .right .mode_display .mode .red{
+    width: 1vw;
+    height: 70%;
+    border-radius: 50%;
+    margin-left: 0.5vw;
+    background-color: red;
+}
+
+/* Glass  */
+
+main .glass{
+    width: 90%;
+    height: auto;
+    background-color: #ffffff56;
+    margin: auto;
+    padding-bottom: 5vh;
+    border-radius: 25px;
+    box-shadow: 0px 0 5px black;
+}
+
+/* Title container  */
+
+main .right .titleContainer{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding-left: 4vw;
+    color: white;
+    text-shadow: 1px 1px 0 black;
+}
+
+main .right .titleContainer .buttons{
+    margin-left: 35vw;
+    display: flex;
+    gap: 1vw;
+}
+
+main .right .titleContainer .buttons select{
+    width: 5vw;
+    height: 3vh;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+main .right .titleContainer .buttons button{
+    width: 6vw;
+    border-radius: 5px;
+}
+
+main .right .titleContainer .buttons button i{
+    font-size: clamp(10px,0.75rem,12px);
+    margin-right: 0.25vw;
+}
+
+main .right .stats{
+    width: 100%;
+    display: flex;
+    gap:1vw;
+    justify-content: center;
+}
+
+main .right .stats .stat{
+    width: 20%;
+    height: 8vh;
+    border-radius: 10px;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    margin-bottom: 5vh;
+    background: linear-gradient(135deg,#10727d,#45507b,#f12be7);
+    box-shadow:0 0 10px #f12be6;
+    color: white;
+}
+
+#wpm .wpm{
+    display: inline-block;
+    transform: scale(5);
+    color: #f12be6;
+    margin-left: 1vw;
+}
+
+#accuracy .accuracy{
+    display: inline-block;
+    transform: scale(5);
+    color: #0dbbce;
+    margin-left: 1vw;
+}
+
+.stats .stat p{
+    font-size: clamp(16px,1.25rem,20px);
+}
+
+                                /* CONTAINER  */
 
 main .container{
-    width: 70%;
-    height: 80vh;
-    margin-left: 5%;
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
+    padding: 2vh;
     border: solid 1px black;
+    line-height: 2;
+    border-radius: 25px;
+    background: linear-gradient(135deg,#10727d79,#45507b7c,#f12be7b2);
+}
+
+main .container p{
+    font-weight: 600;
+    color: white;
+}
+
+main #input-field{
+    display: block;
+    width: 85%;
+    height: 5vh;
+    margin-top: 5vh;
+    border-radius: 10px;
+    margin-inline: auto;
 }

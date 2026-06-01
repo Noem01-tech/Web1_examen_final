@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/game.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -47,12 +48,73 @@
             </div>
             <div class="right">
                 <div class="mode_display">
-                    
+                    <p id="modeP">MODE :</p>
+                    <div class="easy mode">
+                        <div class="green">
+                        </div>
+                        <p>Easy</p>
+                    </div>
+                    <div class="medium mode">
+                        <div class="yellow">
+                        </div>
+                        <p>Medium</p>
+                    </div>
+                    <div class="hard mode">
+                        <div class="red">
+                        </div>
+                        <p>Hard</p>
+                    </div>
                 </div>
-                <div class="container">
-                    <p id="word-display"></p>
-                    <input type="text" id="input-field" autofocus>
-                    <p id="results">Results : </p>
+
+                <div class="glass">
+                    <div class="titleContainer">
+                        <h2>Statistiques</h2>
+                        <div class="buttons">
+                            <select name="" id="language">
+                                <option value="Francais">Français</option>
+                                <option value="English">English</option>
+                            </select>
+                            <select name="Time" id="Time">
+                                <option value="30">30 sec</option>
+                                <option value="60">60 sec</option>
+                            </select>
+                            <button><i class="fa-solid fa-arrow-rotate-left" style="color: rgb(0, 0, 0);" id="restart"></i>Restart</button>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div id="wpm"class="stat">
+                            <h3>WPM ACTUEL</h3>
+                            <span class="wpm">-</span>
+                        </div>
+                        <div id="accuracy"class="stat">
+                            <h3>PRÉCISION</h3>
+                            <span class="accuracy">-</span>
+                        </div>
+                        <div id="typed"class="stat">
+                            <h3>MOTS TAPÉS</h3>
+                            <p class="typed">0</p>
+                        </div>
+                        <div id="time"class="stat">
+                            <h3>TEMPS</h3>
+                            <p class="time">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="container">
+                        <p id="word-display"></p>
+                    </div>
+                        <input type="text" id="input-field" autofocus>
+
+
+                                <!-- RESULT  -->
+
+                    <div class="resultConatiner">
+                        <h2>Résultats de la partie</h2>
+
+                        <div class="chartWrapper">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
             
