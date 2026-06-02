@@ -12,6 +12,7 @@ let totalErrors = 0;
 let totalLetters = 0;
 let countdown=null;
 const wordsToType = [];
+let currentDifficulty = "easy";
 
 const modeSelect = document.getElementById("mode");
 const wordDisplay = document.getElementById("word-display");
@@ -29,15 +30,77 @@ let thirty=30;
 const timeSelect=document.getElementById("Time");
 const resatrt=document.getElementById("restart");
 
-const words = {
-    easy: ["apple", "banana", "grape", "orange", "cherry"],
-    medium: ["keyboard", "monitor", "printer", "charger", "battery"],
-    hard: ["synchronize", "complicated", "development", "extravagant", "misconception"]
-};
+modeSelect.addEventListener("change", (event) => {
+    currentDifficulty = event.target.value;
+
+    count = 0;
+    totalErrors = 0;
+    totalLetters = 0;
+
+    typedDisplay.textContent = "0";
+    wordMinute.textContent = "—";
+    acc.textContent = "—";
+
+    startTest();
+});
+
+const easyWords = [
+    "apple",
+    "banana",
+    "grape",
+    "orange",
+    "cherry",
+    "table",
+    "house",
+    "mouse",
+    "water",
+    "green"
+];
+
+const mediumWords = [
+    "keyboard",
+    "monitor",
+    "printer",
+    "charger",
+    "battery",
+    "network",
+    "computer",
+    "browser",
+    "desktop",
+    "project"
+];
+
+const hardWords = [
+    "synchronize",
+    "complicated",
+    "development",
+    "extravagant",
+    "misconception",
+    "architecture",
+    "communication",
+    "implementation",
+    "responsibility",
+    "configuration"
+];
 
 // Generate a random word from the selected mode
-const getRandomWord = (mode) => {
-    const wordList = words[mode];
+const getRandomWord = () => {
+    let wordList;
+
+    switch (currentDifficulty) {
+        case "easy":
+            wordList = easyWords;
+            break;
+
+        case "medium":
+            wordList = mediumWords;
+            break;
+
+        case "hard":
+            wordList = hardWords;
+            break;
+    }
+
     return wordList[Math.floor(Math.random() * wordList.length)];
 };
 
@@ -53,7 +116,7 @@ const startTest = (wordCount = 50) => {
     previousEndTime = null;
 
     for (let i = 0; i < wordCount; i++) {
-        wordsToType.push(getRandomWord(modeSelect.value));
+        wordsToType.push(getRandomWord());
     }
 
     wordsToType.forEach((word, index) => {
