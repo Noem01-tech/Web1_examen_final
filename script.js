@@ -5,443 +5,249 @@
  * 
  * Sur ce... Amusez-vous bien ! 
  */
-let startTime = null, previousEndTime = null;
-let currentWordIndex = 0;
-let letterindex=0;
-let totalErrors = 0;
-let totalLetters = 0;
-let countdown=null;
-const wordsToType = [];
-let currentDifficulty = "easy";
-
-const modeSelect = document.getElementById("mode");
-const wordDisplay = document.getElementById("word-display");
-const inputField = document.getElementById("input-field");
-
-
-
-const wordMinute=document.querySelector("#wpm .wpm");
-const acc=document.querySelector("#accuracy .accuracy");
-let typedDisplay=document.querySelector("#typed .typed");
-let count=0;
-let time=document.querySelector("#time .time");
-let sixty=60;
-let thirty=30;
-const timeSelect=document.getElementById("Time");
-const resatrt=document.getElementById("restart");
-
-modeSelect.addEventListener("change", (event) => {
-    currentDifficulty = event.target.value;
-
-    count = 0;
-    totalErrors = 0;
-    totalLetters = 0;
-
-    typedDisplay.textContent = "0";
-    wordMinute.textContent = "—";
-    acc.textContent = "—";
-
-    startTest();
-});
-
-const easyWords = [
-    "apple",
-    "banana",
-    "grape",
-    "orange",
-    "cherry",
-    "table",
-    "house",
-    "mouse",
-    "water",
-    "green"
-];
-
-const mediumWords = [
-    "keyboard",
-    "monitor",
-    "printer",
-    "charger",
-    "battery",
-    "network",
-    "computer",
-    "browser",
-    "desktop",
-    "project"
-];
-
-const hardWords = [
-    "synchronize",
-    "complicated",
-    "development",
-    "extravagant",
-    "misconception",
-    "architecture",
-    "communication",
-    "implementation",
-    "responsibility",
-    "configuration"
-];
-
-// Generate a random word from the selected mode
-const getRandomWord = () => {
-    let wordList;
-
-    switch (currentDifficulty) {
-        case "easy":
-            wordList = easyWords;
-            break;
-
-        case "medium":
-            wordList = mediumWords;
-            break;
-
-        case "hard":
-            wordList = hardWords;
-            break;
-    }
-
-    return wordList[Math.floor(Math.random() * wordList.length)];
+const state = {
+  difficulty: "easy",
+  words: [],
+  currentIndex: 0,
+  startTime: null,
+  wordStartTime: null,
+  countdown: null,
+  totalCharsTyped: 0, 
+  totalErrors: 0,
+  wordsTyped: 0,
+  timerDuration: 30,
+  timerRunning: false,
 };
 
+const wordLists = {
+  easy: ["apple","banana","grape","orange","cherry","table","house","mouse","water","green"],
+  medium: ["keyboard","monitor","printer","charger","battery","network","computer","browser","desktop","project"],
+  hard: ["synchronize","complicated","development","extravagant","misconception","architecture","communication","implementation","responsibility","configuration"],
+};
 
-// Initialize the typing test
-const startTest = (wordCount = 50) => {
-    wordsToType.length = 0; // Clear previous words
-    wordDisplay.innerHTML = ""; // Clear display
-    currentWordIndex = 0;
-    startTime = null;
-    clearInterval(countdown);
-    countdown=null;
-    previousEndTime = null;
+const wordDisplay  = document.getElementById("word-display");
+const inputField   = document.getElementById("input-field");
+const timeSelect   = document.getElementById("Time");
+const btnRestart   = document.querySelector(".btn-restart");
 
-    for (let i = 0; i < wordCount; i++) {
-        wordsToType.push(getRandomWord());
-    }
+const easyPill     = document.getElementById("easy-pill");
+const mediumPill   = document.getElementById("medium-pill");
+const hardPill     = document.getElementById("hard-pill");
 
-    wordsToType.forEach((word, index) => {
-        const span = document.createElement("span");
-        // span.textContent = word + " ";
-        word.split("").forEach(letter=>{
-            const letterSpan=document.createElement("span");
-            letterSpan.textContent=letter;
-            span.appendChild(letterSpan);
-        });
+const elWpm        = document.querySelector("#wpm .wpm");
+const elAcc        = document.querySelector("#accuracy .accuracy");
+const elTyped      = document.querySelector("#typed .typed");
+const elTime       = document.querySelector("#time .time");
 
-        const spaceSpan=document.createElement("span")
-        spaceSpan.textContent=" ";
-        span.appendChild(spaceSpan);
-        if (index === 0) span.style.color = "red"; // Highlight first word
-        wordDisplay.appendChild(span);
+function updateDifficultyUI() {
+  easyPill.classList.remove("active-easy");
+  mediumPill.classList.remove("active-medium");
+  hardPill.classList.remove("active-hard");
+
+  const map = { easy: easyPill, medium: mediumPill, hard: hardPill };
+  const cls = { easy: "active-easy", medium: "active-medium", hard: "active-hard" };
+  map[state.difficulty].classList.add(cls[state.difficulty]);
+}
+
+easyPill.addEventListener("click",   () => changeDifficulty("easy"));
+mediumPill.addEventListener("click", () => changeDifficulty("medium"));
+hardPill.addEventListener("click",   () => changeDifficulty("hard"));
+
+function changeDifficulty(level) {
+  state.difficulty = level;
+  updateDifficultyUI();
+  startTest();
+}
+
+
+function startTest() {
+  // Reset état
+  clearInterval(state.countdown);
+  Object.assign(state, {
+    words: [],
+    currentIndex: 0,
+    startTime: null,
+    wordStartTime: null,
+    countdown: null,
+    totalCharsTyped: 0,
+    totalErrors: 0,
+    wordsTyped: 0,
+    timerDuration: parseInt(timeSelect.value),
+    timerRunning: false,
+  });
+
+  // Reset UI
+  elWpm.textContent   = "—";
+  elAcc.textContent   = "—";
+  elTyped.textContent = "0";
+  elTime.innerHTML    = `${state.timerDuration}<span class="stat-unit">s</span>`;
+  inputField.value    = "";
+  inputField.disabled = false;
+  inputField.focus();
+
+  // Générer les mots
+  const list = wordLists[state.difficulty];
+  for (let i = 0; i < 50; i++) {
+    state.words.push(list[Math.floor(Math.random() * list.length)]);
+  }
+
+  renderWords();
+  highlightWord(0);
+}
+
+function renderWords() {
+  wordDisplay.innerHTML = "";
+
+  state.words.forEach((word, wi) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "word";
+    wordSpan.dataset.index = wi;
+
+    word.split("").forEach(char => {
+      const charSpan = document.createElement("span");
+      charSpan.className = "char";
+      charSpan.textContent = char;
+      wordSpan.appendChild(charSpan);
     });
 
-    inputField.value = "";
-};
+    // Espace après chaque mot
+    const space = document.createElement("span");
+    space.className = "space";
+    space.textContent = " ";
+    wordSpan.appendChild(space);
 
+    wordDisplay.appendChild(wordSpan);
+  });
+}
 
-// Start the timer when user begins typing
-const startTimer = () => {
-    if (!startTime) startTime = Date.now();
-};
+function highlightWord(index) {
+  const wordEls = wordDisplay.querySelectorAll(".word");
+  wordEls.forEach(el => el.classList.remove("current-word"));
+  if (wordEls[index]) wordEls[index].classList.add("current-word");
+}
 
-// Calculate and return WPM & accuracy
-const getCurrentStats = () => {
-    const elapsedTime = (Date.now() - previousEndTime) / 1000; // Seconds
-    const wpm = (wordsToType[currentWordIndex].length / 5) / (elapsedTime / 60); // 5 chars = 1 word 
-const accuracy = ((totalLetters - totalErrors) / totalLetters) * 100;
-    return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(2) };
-};
+function startTimer() {
+  if (state.timerRunning) return;
+  state.timerRunning = true;
+  state.startTime    = Date.now();
+  state.wordStartTime = Date.now();
 
-// Move to the next word and update stats only on spacebar press
-const updateWord = (event) => {
-    totalLetters += wordsToType[currentWordIndex].length;
-const { wpm, accuracy } = getCurrentStats();
-    if (event.key === " ") { // Check if spacebar is pressed
-        if (inputField.value.trim() === wordsToType[currentWordIndex]) {
-            count++;
-            typedDisplay.textContent=count;
-            if (!previousEndTime) previousEndTime = startTime;
+  let remaining = state.timerDuration;
 
-            const { wpm, accuracy } = getCurrentStats();
-            wordMinute.textContent=wpm;
-            wordMinute.style.transform = "scale(1)";
-            wordMinute.style.fontWeight = "700";
-            wordMinute.style.textShadow = "1px 1px 0px black";
-            
-            acc.textContent=accuracy;
-            acc.style.transform = "scale(1)";
-            acc.style.fontWeight = "700";
-            acc.style.textShadow = "1px 1px 0px black";
+  state.countdown = setInterval(() => {
+    remaining--;
+    elTime.innerHTML = `${remaining}<span class="stat-unit">s</span>`;
 
-
-            
-            currentWordIndex++;
-            previousEndTime = Date.now();
-            highlightNextWord();
-
-            inputField.value = ""; // Clear input field after space
-            event.preventDefault(); // Prevent adding extra spaces
-        }
+    if (remaining <= 0) {
+      clearInterval(state.countdown);
+      endGame();
     }
-        
-};
+  }, 1000);
+}
 
-// Highlight the current word in red
-// const highlightNextWord = (event) => {
-//     const wordElements = wordDisplay.children;
+inputField.addEventListener("input", () => {
+  if (!state.timerRunning) startTimer();
+  renderCurrentWordFeedback();
+});
 
+inputField.addEventListener("keydown", (e) => {
+  if (e.key === " ") {
+    e.preventDefault();
+    validateWord();
+  }
+});
 
-const highlightNextWord = () => { 
-    const wordElements = wordDisplay.children;
-    if (currentWordIndex < wordElements.length) {
-        if (currentWordIndex > 0) {
-            wordElements[currentWordIndex - 1].style.color = "lime";
-        }
-        wordElements[currentWordIndex].style.color = "red";
-    }
+function renderCurrentWordFeedback() {
+  const typed      = inputField.value;
+  const currentWord = state.words[state.currentIndex];
+  const wordEl     = wordDisplay.querySelectorAll(".word")[state.currentIndex];
+  if (!wordEl) return;
 
+  const charEls = wordEl.querySelectorAll(".char");
 
-};
+  charEls.forEach((charEl, i) => {
+    charEl.classList.remove("char-correct", "char-wrong", "char-cursor");
 
-    inputField.addEventListener("keydown",(event)=>{
-          const wordElements = wordDisplay.children;
-
-    setTimeout(() => {
-        const typed = inputField.value;
-        const currentWord = wordsToType[currentWordIndex];
-
-        for (let i = 0; i < currentWord.length; i++) {
-            wordElements[currentWordIndex].children[i].style.color = "";
-        }
-        for (let i = 0; i < currentWord.length; i++) {
-            wordElements[currentWordIndex].children[i].style.borderLeft = "";
-            
-        }
-
-        const cursorIndex = typed.length;
-        if (cursorIndex < currentWord.length) {
-            wordElements[currentWordIndex].children[cursorIndex].style.borderLeft = "2px solid white";
-        }
-
-        for (let i = 0; i < currentWord.length; i++) {
-    const letter = wordElements[currentWordIndex].children[i];
-    
     if (i < typed.length) {
-        if (typed[i] === currentWord[i]) {
-            letter.style.color = "lime";
-        } else if (currentWord.includes(typed[i])) {
-            letter.style.color = "yellow";
-            totalErrors++;
-        } else {
-            letter.style.color = "red";
-            totalErrors++;
-        }
+      charEl.classList.add(typed[i] === currentWord[i] ? "char-correct" : "char-wrong");
+    }
+
+    if (i === typed.length) {
+      charEl.classList.add("char-cursor");
+    }
+  });
+
+  wordEl.classList.toggle("word-overflow", typed.length > currentWord.length);
+}
+
+function validateWord() {
+  const typed       = inputField.value.trim();
+  const currentWord = state.words[state.currentIndex];
+  if (typed === "") return;
+
+  let wordErrors = 0;
+  for (let i = 0; i < Math.max(typed.length, currentWord.length); i++) {
+    if (typed[i] !== currentWord[i]) wordErrors++;
+  }
+
+  state.totalCharsTyped += currentWord.length;
+  state.totalErrors     += wordErrors;
+
+  const wordEl = wordDisplay.querySelectorAll(".word")[state.currentIndex];
+  if (wordEl) {
+    wordEl.classList.add(wordErrors === 0 ? "word-correct" : "word-wrong");
+    wordEl.classList.remove("current-word", "word-overflow");
+  }
+
+  state.wordsTyped++;
+  state.currentIndex++;
+  inputField.value = "";
+
+  updateStats();
+  highlightWord(state.currentIndex);
+  scrollToCurrentWord();
+}
+
+function updateStats() {
+  // WPM : mots tapés / minutes écoulées (1 mot = 5 chars)
+  const elapsed = (Date.now() - state.startTime) / 1000 / 60; // en minutes
+  const wpm = elapsed > 0
+    ? Math.round((state.totalCharsTyped / 5) / elapsed)
+    : 0;
+
+  // Précision : chars corrects / chars totaux tapés
+  const correctChars = state.totalCharsTyped - state.totalErrors;
+  let accuracy;
+
+    if (state.totalCharsTyped > 0) {
+        accuracy = Math.round((correctChars / state.totalCharsTyped) * 100);
     } else {
-        letter.style.color = ""; 
-    }
-}
-
-        if (typed === currentWord) {
-            wordElements[currentWordIndex].style.color = "lime";
-        }else{
-            wordElements[currentWordIndex].style.color = "red";
-        }
-        
-        if (typed.length > currentWord.length) {
-    wordElements[currentWordIndex].style.outline = "3px solid orange";
-    totalErrors++;
-} else {
-    wordElements[currentWordIndex].style.outline = "";
-}
-
-    }, 0);
-
-    if (!startTime) {
-        startTimer();
-
-        if (timeSelect.value.includes("30")) time.textContent = thirty;
-        else if (timeSelect.value.includes("60")) time.textContent = sixty;
-        
-        countdown = setInterval(() => {
-            const current = parseInt(time.textContent);
-            if (current > 0) {
-                time.textContent = current - 1;
-            } else {
-                clearInterval(countdown);
-                alert("Temps écoulé !");
-            }
-        }, 1000);
+        accuracy = 100;
     }
 
-    startTimer();
-    updateWord(event);
-       
-    })
+  elWpm.textContent   = wpm;
+  elAcc.textContent   = `${accuracy}%`;
+  elTyped.textContent = state.wordsTyped;
+}
 
-// Event listeners
-// Attach `updateWord` to `keydown` instead of `input`
-// inputField.addEventListener("keydown", (event) => {
-//     startTimer();
-//     updateWord(event);
-// });
-modeSelect.addEventListener("change", () => startTest());
+function endGame() {
+  inputField.disabled = true;
 
-// Start the test
+  wordDisplay.querySelectorAll(".char-cursor").forEach(el => el.classList.remove("char-cursor"));
+
+  updateStats();
+}
+
+function scrollToCurrentWord() {
+  const wordEls = wordDisplay.querySelectorAll(".word");
+  const current = wordEls[state.currentIndex];
+  if (current) {
+    current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+}
+
+btnRestart.addEventListener("click", startTest);
+timeSelect.addEventListener("change", startTest);
+
+updateDifficultyUI();
 startTest();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let startTime = null, previousEndTime = null;
-// let currentWordIndex = 0;
-// const wordsToType = [];
-
-// const modeSelect = document.getElementById("mode");
-// const wordDisplay = document.getElementById("word-display");
-// const inputField = document.getElementById("input-field");
-// const results = document.getElementById("results");
-
-// const words = {
-//     easy: ["apple", "banana", "grape", "orange", "cherry"],
-//     medium: ["keyboard", "monitor", "printer", "charger", "battery"],
-//     hard: ["synchronize", "complicated", "development", "extravagant", "misconception"]
-// };
-
-// // Generate a random word from the selected mode
-// const getRandomWord = (mode) => {
-//     const wordList = words[mode];
-//     return wordList[Math.floor(Math.random() * wordList.length)];
-// };
-
-// Initialize the typing test
-// const startTest = (wordCount = 50) => {
-//     wordsToType.length = 0; // Clear previous words
-//     wordDisplay.innerHTML = ""; // Clear display
-//     currentWordIndex = 0;
-//     startTime = null;
-//     previousEndTime = null;
-
-//     for (let i = 0; i < wordCount; i++) {
-//         wordsToType.push(getRandomWord(modeSelect.value));
-//     }
-
-//     wordsToType.forEach((word, index) => {
-//         const span = document.createElement("span");
-//         span.textContent = word + " ";
-//         if (index === 0) span.style.color = "red"; // Highlight first word
-//         wordDisplay.appendChild(span);
-//     });
-
-//     inputField.value = "";
-//     results.textContent = "";
-// };
-
-// // Start the timer when user begins typing
-// const startTimer = () => {
-//     if (!startTime) startTime = Date.now();
-// };
-
-// // Calculate and return WPM & accuracy
-// const getCurrentStats = () => {
-//     const elapsedTime = (Date.now() - previousEndTime) / 1000; // Seconds
-//     const wpm = (wordsToType[currentWordIndex].length / 5) / (elapsedTime / 60); // 5 chars = 1 word
-//     const accuracy = (wordsToType[currentWordIndex].length / inputField.value.length) * 100;
-
-//     return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(2) };
-// };
-
-// // Move to the next word and update stats only on spacebar press
-// const updateWord = (event) => {
-//     if (event.key === " ") { // Check if spacebar is pressed
-//         if (inputField.value.trim() === wordsToType[currentWordIndex]) {
-//             if (!previousEndTime) previousEndTime = startTime;
-
-//             const { wpm, accuracy } = getCurrentStats();
-//             results.textContent = `WPM: ${wpm}, Accuracy: ${accuracy}%`;
-
-//             currentWordIndex++;
-//             previousEndTime = Date.now();
-//             highlightNextWord();
-
-//             inputField.value = ""; // Clear input field after space
-//             event.preventDefault(); // Prevent adding extra spaces
-//         }
-//     }
-// };
-
-// // Highlight the current word in red
-// const highlightNextWord = () => {
-//     const wordElements = wordDisplay.children;
-
-//     if (currentWordIndex < wordElements.length) {
-//         if (currentWordIndex > 0) {
-//             wordElements[currentWordIndex - 1].style.color = "black";
-//         }
-//         wordElements[currentWordIndex].style.color = "red";
-//     }
-// };
-
-// // Event listeners
-// // Attach `updateWord` to `keydown` instead of `input`
-// inputField.addEventListener("keydown", (event) => {
-//     startTimer();
-//     updateWord(event);
-// });
-// modeSelect.addEventListener("change", () => startTest());
-
-// // Start the test
-// startTest();
