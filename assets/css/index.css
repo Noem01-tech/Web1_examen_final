@@ -47,7 +47,7 @@
         }
 
         .header-nav {
-            display: flex; align-items: center; gap: 6px;
+            display: flex; align-items: center; gap: 6px;margin-right: 2vw;
         }
 
         .header-nav a {
@@ -64,9 +64,9 @@
             background: rgba(255,255,255,0.06);
         }
 
-        .header-right {
+        /* .header-right {
             display: flex; align-items: center; gap: 16px;
-        }
+        } */
 
         .mode-select-wrap {
             display: flex; align-items: center; gap: 8px;
@@ -216,6 +216,7 @@
             content: '';
             position: absolute; inset: 0;
             background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+
         }
 
         .btn-primary:hover {
