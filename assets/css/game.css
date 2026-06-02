@@ -121,50 +121,6 @@
         }
 
         .nav-item:hover img, .nav-item.active img { opacity: 1; }
-
-        /* Dark mode toggle */
-        .sidebar-bottom {
-            padding: 16px;
-            border-top: 1px solid var(--border);
-            flex-shrink: 0;
-        }
-
-        .toggle-row {
-            display: flex; align-items: center; justify-content: space-between;
-        }
-
-        .toggle-row span {
-            font-size: 13px; font-weight: 400;
-            color: var(--text-secondary);
-        }
-
-        .toggle {
-            width: 44px; height: 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            position: relative; cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
-        }
-
-        .toggle.on {
-            background: rgba(14,139,150,0.3);
-            border-color: var(--teal);
-        }
-
-        .toggle-knob {
-            position: absolute; top: 2px; left: 2px;
-            width: 18px; height: 18px;
-            background: var(--text-muted);
-            border-radius: 50%;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .toggle.on .toggle-knob {
-            transform: translateX(20px);
-            background: var(--teal-light);
-        }
-
         /* ─── MAIN CONTENT ───────────────────────────────────── */
         .main-content {
             flex: 1;
@@ -176,8 +132,8 @@
         /* Top bar */
         .topbar {
             height: var(--nav-h);
+            padding: 10px;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 0 28px;
             border-bottom: 1px solid var(--border);
             background: var(--bg-surface);
             flex-shrink: 0;
