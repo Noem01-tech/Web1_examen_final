@@ -55,6 +55,96 @@
     line-height: 1.6;
 }
 
+/* ─── CTA HERO ───────────────────────────────────────── */
+.about-hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.cta-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--gradient);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.cta-btn-primary:hover  { opacity: 0.88; transform: translateY(-2px); }
+.cta-btn-primary:active { transform: translateY(0); }
+.cta-btn-primary.large  { padding: 14px 32px; font-size: 15px; }
+
+.cta-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.cta-btn-secondary:hover {
+    border-color: var(--teal-light);
+    color: var(--teal-light);
+}
+
+/* ─── CTA FINALE ─────────────────────────────────────── */
+.about-cta-final {
+    position: relative;
+    padding: 100px 40px;
+    text-align: center;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+}
+
+.about-cta-final-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-cta-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-primary);
+}
+
+.about-cta-title .brand {
+    font-family: 'Cherry Bomb One', cursive;
+    background: var(--gradient);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-cta-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 /* Lueurs d'ambiance de la page à propos */
 .glow-orb-about-1 {
     width: 500px; height: 500px;
@@ -301,4 +391,10 @@
     .about-hero { padding: 100px 24px 60px; }
     .about-story, .about-tech { padding: 40px 24px; }
     .tech-cards-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .about-hero-cta { flex-direction: column; width: 100%; }
+    .cta-btn-primary, .cta-btn-secondary { width: 100%; justify-content: center; }
+    .about-cta-final { padding: 60px 24px; }
 }
