@@ -17,10 +17,10 @@ const state = {
   totalCharsTyped: 0,
   totalErrors: 0,
   wordsTyped: 0,
-  wordsCorrect: 0,       // ← manquait dans ta base
+  wordsCorrect: 0, 
   timerDuration: 30,
   timerRunning: false,
-  wpmHistory: [],        // { second, wpm, accuracy }
+  wpmHistory: [], 
 };
 
 // ─── LISTES DE MOTS ───────────────────────────────────────────────────────────
