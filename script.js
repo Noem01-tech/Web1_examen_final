@@ -298,17 +298,35 @@ function endGame() {
 // ─── SCORE / GRADE ────────────────────────────────────────────────────────────
 
 function getGrade(wpm, accuracy) {
+  const worst = { grade: "F", color: "#F87171", label: "Recommence !" };
+
+   if (accuracy <= 0 || wpm <= 0) {
+    return worst;
+  }
+
   const wpmRef  = { easy: 60, medium: 50, hard: 35 };
   const ref     = wpmRef[state.difficulty];
   const wpmScore = Math.min((wpm / ref) * 100, 100);
   const composite = wpmScore * 0.7 + accuracy * 0.3;
 
-  if (composite >= 95) return { grade: "S", color: "#F59E0B", label: "Parfait !" };
-  if (composite >= 85) return { grade: "A", color: "#34D399", label: "Excellent !" };
-  if (composite >= 70) return { grade: "B", color: "#14B8C6", label: "Bien joué" };
-  if (composite >= 55) return { grade: "C", color: "#A78BFA", label: "Correct" };
-  if (composite >= 40) return { grade: "D", color: "#FB923C", label: "À améliorer" };
-  return              { grade: "F", color: "#F87171", label: "Recommence !" };
+  if (composite >= 95) {
+    return { grade: "S", color: "#F59E0B", label: "Parfait !" };
+  }
+  if (composite >= 85){
+    return { grade: "A", color: "#34D399", label: "Excellent !"};
+    }
+    
+  if (composite >= 70) {
+   return { grade: "B", color: "#14B8C6", label: "Bien joué" };
+  }
+    
+  if (composite >= 55){
+    return { grade: "C", color: "#A78BFA", label: "Correct" };
+  } 
+  if (composite >= 40) {
+    return { grade: "D", color: "#FB923C", label: "À améliorer" };
+  }
+  return  worst;
 }
 
 // ─── RÉSULTATS ────────────────────────────────────────────────────────────────
