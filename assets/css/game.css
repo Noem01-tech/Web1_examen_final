@@ -239,6 +239,28 @@ body {
   box-shadow: 0 0 6px #f87171;
 }
 
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.btn-home:hover {
+    border-color: var(--teal-light);
+    color: var(--teal-light);
+    background: rgba(20,184,198,0.06);
+}
+
 /* ─── SCROLL AREA ────────────────────────────────────── */
 .scroll-area {
   flex: 1;
