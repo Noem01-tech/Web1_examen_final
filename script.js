@@ -85,6 +85,7 @@ function startTest() {
     timerDuration: parseInt(timeSelect.value),
     timerRunning: false,
     wpmHistory: [],
+    charsAtLastSecond: 0,
   });
 
   // Reset UI stats
@@ -170,20 +171,17 @@ function startTimer() {
 }
 
 function recordSnapshot(second) {
-  const elapsedMin = second / 60;
-  const wpm = elapsedMin > 0
-    ? Math.round((state.totalCharsTyped / 5) / elapsedMin)
-    : 0;
+  const charsThisSecond = state.totalCharsTyped - state.charsAtLastSecond;
+  const wpmInstant = Math.round((charsThisSecond / 5) * 60);
+  state.charsAtLastSecond = state.totalCharsTyped;
 
   const correctChars = state.totalCharsTyped - state.totalErrors;
   const accuracy = state.totalCharsTyped > 0
     ? Math.round((correctChars / state.totalCharsTyped) * 100)
     : 100;
 
-  state.wpmHistory.push({ second, wpm, accuracy });
-
-  // Graphique live
-  pushChartPoint(second, wpm, accuracy);
+  state.wpmHistory.push({ second, wpm: wpmInstant, accuracy });
+  pushChartPoint(second, wpmInstant, accuracy);
 }
 
 // ─── FRAPPE ───────────────────────────────────────────────────────────────────
